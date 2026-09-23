@@ -1,49 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Merchander – online wholesale ordering for Golden Legacy General Merchandise, Caloocan City.">
-  <title>Merchander – Golden Legacy General Merchandise</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2307182a'/%3E%3Cpath d='M16 5l9 11-9 11-9-11z' fill='%23e8b923'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="css/styles.css">
-  <script>
-    // Apply the saved theme before first paint to avoid a flash.
-    try {
-      var s = JSON.parse(localStorage.getItem('merchander.session') || 'null');
-      var u = s && (JSON.parse(localStorage.getItem('merchander.users') || '[]').find(function (x) { return x.id === s.userId; }));
-      document.documentElement.dataset.theme = (u && u.prefs && u.prefs.theme) || JSON.parse(localStorage.getItem('merchander.theme') || '"light"');
-    } catch (e) {}
-  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Golden Legacy General Merchandise</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <a class="skip" href="#app">Skip to content</a>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="#/" class="brand" aria-label="Golden Legacy home">
-        <svg viewBox="0 0 32 32" width="36" height="36" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#07182a"/><path d="M16 5l9 11-9 11-9-11z" fill="#e8b923"/></svg>
-        <span><strong>GOLDEN LEGACY</strong><small>General Merchandise</small></span>
-      </a>
-      <nav id="nav" class="nav" aria-label="Main"></nav>
-      <button id="themeToggle" class="icon-btn" type="button" aria-label="Switch theme">☾</button>
-    </div>
-  </header>
-
-  <main id="app" class="container" tabindex="-1"></main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p><strong>Merchander</strong> · Ordering platform for Golden Legacy General Merchandise, Caloocan City</p>
-      <p class="small">Sprint 1 prototype · <button id="resetDemo" class="link small" type="button">Reset demo data</button></p>
-    </div>
-  </footer>
-
-  <div id="inbox" class="inbox" aria-live="polite" aria-label="Simulated SMS and email messages"></div>
-  <div id="toasts" class="toasts" aria-live="polite"></div>
-  <div id="modal" class="modal" hidden></div>
-
-  <script src="js/config.js"></script>
-  <script src="js/store.js"></script>
-  <script src="js/app.js"></script>
-</body>
-</html>
+<div class="role-switcher"><button class="active" onclick="switchRole('customer',this)">Customer</button><button onclick="switchRole('admin',this)">Admin</button><button onclick="switchRole('staff',this)">Staff</button></div>
+<section id="customer" class="view active">
+<header class="top"><div class="brand"><b>◆ GOLDEN LEGACY</b><small>GENERAL MERCHANDISE</small></div><div class="search"><input id="search" placeholder="Search for Softdrinks and Beer..."><button onclick="searchProducts()">⌕</button></div><div class="actions"><button onclick="page('cart')">🛒 Cart <b id="cartCount">0</b></button><button onclick="notify()">🔔 Notifications</button><button onclick="profile()">● Juan Dela Cruz</button></div></header>
+<nav><button onclick="page('home')">⌂ Home</button><button onclick="browse('Softdrinks')">🥤 Softdrinks</button><button onclick="browse('Beer')">🍺 Beer</button></nav>
+<main id="customerContent"></main>
+</section>
+<section id="admin" class="view"><aside><div class="side-brand">◆ GOLDEN LEGACY<small>GENERAL MERCHANDISE</small></div><div id="adminMenu"></div><div class="help"><b>Need Help?</b><p>Our support team is ready to help you.</p><button onclick="notify()">Contact Support</button></div></aside><div class="admin-main"><header class="admin-head"><h1 id="adminTitle">Dashboard</h1><input placeholder="Search Anything..."></header><main id="adminContent"></main></div></section>
+<section id="staff" class="view"><header class="staff-head"><div class="brand"><b>◆ GOLDEN LEGACY</b><small>GENERAL MERCHANDISE</small></div><input placeholder="Search for Anything..."><div><button onclick="staff('duty')">Duty Clock</button><button onclick="staff('commission')">Commission</button><button onclick="notify()">● Notifications</button></div></header><main id="staffContent"></main></section>
+<div id="modal" class="modal"><div class="modal-box" id="modalBox"></div></div>
+<script src="script.js"></script>
+</body></html>
